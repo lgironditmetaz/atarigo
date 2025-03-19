@@ -1,24 +1,20 @@
 name: Rust
 
-on:
-  workflow_dispatch:
-    branches: [ "main" ]
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request, workflow_dispatch]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Build
+    - name: Building the app
       run: cargo build --verbose
-    - name: Run tests
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Running unit tests
       run: cargo test --verbose
